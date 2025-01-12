@@ -52,7 +52,7 @@ public class Grabbable : MonoBehaviour
         m_IsInHand = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (m_IsGrabbed && m_Grabber != null)
         {
@@ -69,12 +69,12 @@ public class Grabbable : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.Lerp(transform.position, m_Grabber.position, Time.fixedDeltaTime * m_LerpSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, m_Grabber.rotation, Time.fixedDeltaTime * m_LerpSpeed); 
+                transform.position = Vector3.Lerp(transform.position, m_Grabber.position, Time.deltaTime * m_LerpSpeed);
+                transform.rotation = Quaternion.Lerp(transform.rotation, m_Grabber.rotation, Time.deltaTime * m_LerpSpeed); 
             }
             
             // Calculate the velocity
-            m_Velocity = (transform.position - m_PreviousPosition) / Time.fixedDeltaTime; // divide the delta time, since it is the velocity we get not the distance
+            m_Velocity = (transform.position - m_PreviousPosition) / Time.deltaTime; // divide the delta time, since it is the velocity we get not the distance
             
             //--- Calculate angular velocity to rotate the object when it is thrown ---//
             
@@ -88,7 +88,7 @@ public class Grabbable : MonoBehaviour
             angle *= Mathf.Deg2Rad; 
             
             // Get the angular velocity
-            m_AngularVelocity = (angle * axis) / Time.fixedDeltaTime;
+            m_AngularVelocity = (angle * axis) / Time.deltaTime;
             
             //---[END] Calculate angular velocity to rotate the object when it is thrown ---//
             

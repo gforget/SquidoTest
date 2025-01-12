@@ -901,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 1
+  XRigParents: {fileID: 1044569632}
   positionAction: {fileID: -7660009581598945247, guid: 35add559e59562c4fb86dcb621499392,
     type: 3}
   rotationAction: {fileID: 6999972209858362240, guid: 35add559e59562c4fb86dcb621499392,
@@ -909,6 +910,8 @@ MonoBehaviour:
     type: 3}
   thumbstickAction: {fileID: -2804588702124253401, guid: 35add559e59562c4fb86dcb621499392,
     type: 3}
+  unselectColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0, g: 1, b: 0, a: 1}
   grabRange: 100
   throwForceMultiplier: 5
   angularVelocityMultiplier: 1
@@ -1188,6 +1191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 1
+  XRigParents: {fileID: 1044569632}
   positionAction: {fileID: 8559143693559437649, guid: 35add559e59562c4fb86dcb621499392,
     type: 3}
   rotationAction: {fileID: 810604982524961140, guid: 35add559e59562c4fb86dcb621499392,
@@ -1196,10 +1200,13 @@ MonoBehaviour:
     type: 3}
   thumbstickAction: {fileID: 7616293512931422312, guid: 35add559e59562c4fb86dcb621499392,
     type: 3}
+  unselectColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 0, g: 1, b: 0, a: 1}
   grabRange: 100
   throwForceMultiplier: 5
   angularVelocityMultiplier: 1
   lerpSpeed: 10
+  speed: 5
 --- !u!1 &1044569630
 GameObject:
   m_ObjectHideFlags: 0

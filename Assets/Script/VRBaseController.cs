@@ -5,6 +5,11 @@ using UnityEngine.Serialization;
 public class VRBaseController : MonoBehaviour
 {
     [SerializeField] private bool debugMode;
+    
+    [Header("General Reference")]
+    [SerializeField] protected Transform XRigParents;
+    
+    [Header("Input Actions References")]
     [SerializeField] private InputActionReference positionAction;
     [SerializeField] private InputActionReference rotationAction;
     [SerializeField] private InputActionReference grabAction;
