@@ -15,7 +15,7 @@ public class Grabbable : MonoBehaviour
     private Vector3 m_AngularVelocity;
 
     private float m_LerpSpeed;
-    private bool m_IsInHand;
+    
     private void Awake()
     {
         m_Rb = GetComponent<Rigidbody>();
@@ -40,42 +40,25 @@ public class Grabbable : MonoBehaviour
         //Reactivate physic
         m_Rb.useGravity = true;
         m_Rb.isKinematic = false;
-
-        //if (m_IsInHand)
-        //{
-            // Apply the throw force immediately before physics takes over
-            m_Rb.AddForce(m_Velocity * throwForceMultiplier, ForceMode.Impulse);
-            // Add angular velocity
-            m_Rb.angularVelocity = m_AngularVelocity * angularVelocityMultiplier;
-        //}
         
-        //m_IsInHand = false;
+        // Apply the throw force immediately before physics takes over
+        m_Rb.AddForce(m_Velocity * throwForceMultiplier, ForceMode.Impulse);
+        // Add angular velocity
+        m_Rb.angularVelocity = m_AngularVelocity * angularVelocityMultiplier;
     }
 
     void Update()
     {
         if (m_IsGrabbed && m_Grabber != null)
         {
-            // Move object to hand
-            // if (Vector3.Distance(transform.position, m_Grabber.position) < 0.1f)
-            // {
-            //     m_IsInHand = true;
-            // }
-            //
-            // if (m_IsInHand)
-            // {
-            //     transform.position = m_Grabber.position;
-            //     transform.rotation = m_Grabber.rotation; 
-            // }
-            // else
-            // {
-                transform.position = Vector3.Lerp(transform.position, m_Grabber.position, Time.deltaTime * m_LerpSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, m_Grabber.rotation, Time.deltaTime * m_LerpSpeed); 
-            //}
+            //TODO: Figure out a way to prevent ball from being thrown while lerping toward the hand.
+            transform.position = Vector3.Lerp(transform.position, m_Grabber.position, Time.deltaTime * m_LerpSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, m_Grabber.rotation, Time.deltaTime * m_LerpSpeed); 
             
             // Calculate the velocity
             m_Velocity = (transform.position - m_PreviousPosition) / Time.deltaTime; // divide the delta time, since it is the velocity we get not the distance
             
+            //TODO: Add a texture to the balloon so it show the rotation when you throw it
             //--- Calculate angular velocity to rotate the object when it is thrown ---//
             
             // the difference between the current rotation and the previous rotation
