@@ -24,7 +24,7 @@ public class VRBaseController : MonoBehaviour
     [SerializeField] private float lerpSpeed = 10f;
     
     private LineRenderer m_LineRenderer;
-    private Grabbable m_CurrentHoveredGrabbedObject = null;
+    private GameObject m_CurrentHoveredObject = null;
     private Grabbable m_CurrentGrabbedObject = null;
      
     private void Awake()
@@ -76,7 +76,7 @@ public class VRBaseController : MonoBehaviour
             if (grabbable != null)
             {
                 grabbable.GetComponent<Renderer>().material.color = hoverColor;
-                m_CurrentHoveredGrabbedObject = grabbable;
+                m_CurrentHoveredObject = grabbable.gameObject;
                 
                 if (grabAction.action.ReadValue<float>() > 0.5f && m_CurrentGrabbedObject == null)
                 {
@@ -86,12 +86,24 @@ public class VRBaseController : MonoBehaviour
             }
             else
             {
-                UnhoverGrabbable();
+                UnhoverObject();
+            }
+            
+            BallSpawnerButton ballSpawnerButton = hit.collider.GetComponent<BallSpawnerButton>();
+            if (ballSpawnerButton != null)
+            {
+                ballSpawnerButton.GetComponent<Renderer>().material.color = hoverColor;
+                m_CurrentHoveredObject = ballSpawnerButton.gameObject;
+                
+                if (grabAction.action.ReadValue<float>() > 0.5f)
+                {
+                    ballSpawnerButton.RespawnBalloon();
+                }
             }
         }
         else
         {
-            UnhoverGrabbable();
+            UnhoverObject();
         }
 
         // Release object if grab button is released
@@ -102,12 +114,12 @@ public class VRBaseController : MonoBehaviour
         }
     }
 
-    private void UnhoverGrabbable()
+    private void UnhoverObject()
     {
-        if (m_CurrentHoveredGrabbedObject != null && m_CurrentGrabbedObject == null)
+        if (m_CurrentHoveredObject != null && m_CurrentGrabbedObject == null)
         {
-            m_CurrentHoveredGrabbedObject.GetComponent<Renderer>().material.color = unselectColor;
-            m_CurrentHoveredGrabbedObject = null;
+            m_CurrentHoveredObject.GetComponent<Renderer>().material.color = unselectColor;
+            m_CurrentHoveredObject = null;
         }
     }
 }

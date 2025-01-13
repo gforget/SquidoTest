@@ -31,16 +31,4 @@ public class GameManager : MonoBehaviour
     {
         Instance = this; // Keep this instance alive across scenes
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
