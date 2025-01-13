@@ -41,15 +41,15 @@ public class Grabbable : MonoBehaviour
         m_Rb.useGravity = true;
         m_Rb.isKinematic = false;
 
-        if (m_IsInHand)
-        {
+        //if (m_IsInHand)
+        //{
             // Apply the throw force immediately before physics takes over
             m_Rb.AddForce(m_Velocity * throwForceMultiplier, ForceMode.Impulse);
             // Add angular velocity
             m_Rb.angularVelocity = m_AngularVelocity * angularVelocityMultiplier;
-        }
+        //}
         
-        m_IsInHand = false;
+        //m_IsInHand = false;
     }
 
     void Update()
@@ -57,21 +57,21 @@ public class Grabbable : MonoBehaviour
         if (m_IsGrabbed && m_Grabber != null)
         {
             // Move object to hand
-            if (Vector3.Distance(transform.position, m_Grabber.position) < 0.1f)
-            {
-                m_IsInHand = true;
-            }
-
-            if (m_IsInHand)
-            {
-                transform.position = m_Grabber.position;
-                transform.rotation = m_Grabber.rotation; 
-            }
-            else
-            {
+            // if (Vector3.Distance(transform.position, m_Grabber.position) < 0.1f)
+            // {
+            //     m_IsInHand = true;
+            // }
+            //
+            // if (m_IsInHand)
+            // {
+            //     transform.position = m_Grabber.position;
+            //     transform.rotation = m_Grabber.rotation; 
+            // }
+            // else
+            // {
                 transform.position = Vector3.Lerp(transform.position, m_Grabber.position, Time.deltaTime * m_LerpSpeed);
                 transform.rotation = Quaternion.Lerp(transform.rotation, m_Grabber.rotation, Time.deltaTime * m_LerpSpeed); 
-            }
+            //}
             
             // Calculate the velocity
             m_Velocity = (transform.position - m_PreviousPosition) / Time.deltaTime; // divide the delta time, since it is the velocity we get not the distance
